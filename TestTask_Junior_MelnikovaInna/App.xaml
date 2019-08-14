@@ -1,0 +1,20 @@
+﻿<Application
+    x:Class="TestTask_Junior_MelnikovaInna.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:TestTask_Junior_MelnikovaInna"
+    StartupUri="MainWindow.xaml">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TestTask_Junior_MelnikovaInna;component/Resources/AdditionalBlueButtonStyle.xaml" />
+                <ResourceDictionary Source="/TestTask_Junior_MelnikovaInna;component/Resources/CloseButtonStyle.xaml" />
+                <ResourceDictionary Source="/TestTask_Junior_MelnikovaInna;component/Resources/MyResizeGripStyle.xaml" />
+                <ResourceDictionary Source="/TestTask_Junior_MelnikovaInna;component/Resources/SliderStyle.xaml" />
+                <ResourceDictionary Source="/TestTask_Junior_MelnikovaInna;component/Resources/TasksStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

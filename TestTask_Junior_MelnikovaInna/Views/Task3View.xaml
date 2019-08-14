@@ -1,0 +1,64 @@
+﻿<UserControl
+    x:Class="TestTask_Junior_MelnikovaInna.Views.Task3View"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:HelixToolkit="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TestTask_Junior_MelnikovaInna.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:TestTask_Junior_MelnikovaInna.ViewModels"
+    d:DesignHeight="285"
+    d:DesignWidth="395"
+    mc:Ignorable="d">
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="local:Task3WindowCommand.Load" Executed="Load_Executed" />
+        <CommandBinding Command="local:Task3WindowCommand.Clear" Executed="Clear_Executed" />
+    </UserControl.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="topGrid">
+            <HelixToolkit:HelixViewport3D x:Name="myView" ZoomExtentsWhenLoaded="True">
+                <HelixToolkit:SunLight />
+                <ModelVisual3D x:Name="model3D" x:FieldModifier="public" />
+            </HelixToolkit:HelixViewport3D>
+            <TextBlock
+                x:Name="previewText"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Text="Task content" />
+        </Grid>
+
+        <Line
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            Stroke="#b1b1b1"
+            StrokeThickness="1"
+            X1="0"
+            X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" />
+        <DockPanel Grid.Row="1">
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Button
+                    x:Name="loadButton"
+                    Width="50"
+                    Height="20"
+                    Margin="15,0,5,0"
+                    Command="local:Task3WindowCommand.Load"
+                    Content="load"
+                    Style="{StaticResource additionalBlueButtonStyle}" />
+                <Button
+                    Width="50"
+                    Height="20"
+                    Margin="5,0,5,0"
+                    Command="local:Task3WindowCommand.Clear"
+                    Content="clear"
+                    Style="{StaticResource additionalBlueButtonStyle}" />
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,141 @@
+﻿<UserControl
+    x:Class="TestTask_Junior_MelnikovaInna.Views.Task5View"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:HelixToolkit="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TestTask_Junior_MelnikovaInna.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="285"
+    d:DesignWidth="395"
+    mc:Ignorable="d">
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="local:Task5WindowCommand.Load" Executed="Load_Executed" />
+        <CommandBinding Command="local:Task5WindowCommand.Clear" Executed="Clear_Executed" />
+        <CommandBinding Command="local:Task5WindowCommand.Start" Executed="Start_Executed" />
+        <CommandBinding Command="local:Task5WindowCommand.Stop" Executed="Stop_Executed" />
+    </UserControl.CommandBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+
+        <HelixToolkit:HelixViewport3D x:Name="myView" ZoomExtentsWhenLoaded="True">
+            <HelixToolkit:SunLight />
+            <HelixToolkit:GridLinesVisual3D
+                Width="100"
+                Length="100"
+                MajorDistance="50"
+                MinorDistance="10"
+                Thickness="1" />
+            <ModelVisual3D x:Name="model3D" x:FieldModifier="public" />
+        </HelixToolkit:HelixViewport3D>
+        <TextBlock
+            x:Name="previewText"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
+
+        <DockPanel Grid.Row="1">
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.7*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Line
+                    HorizontalAlignment="Stretch"
+                    Stroke="#b1b1b1"
+                    StrokeThickness="1"
+                    X1="0"
+                    X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" />
+
+                <StackPanel Orientation="Horizontal">
+                    <Button
+                        x:Name="loadButton"
+                        Width="50"
+                        Height="20"
+                        Margin="15,0,5,0"
+                        Command="local:Task5WindowCommand.Load"
+                        Content="load"
+                        Style="{StaticResource additionalBlueButtonStyle}" />
+                    <Button
+                        Width="50"
+                        Height="20"
+                        Margin="5,0,5,0"
+                        Command="local:Task5WindowCommand.Clear"
+                        Content="clear"
+                        Style="{StaticResource additionalBlueButtonStyle}" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,0,5"
+                    Orientation="Vertical">
+                    <StackPanel Margin="0,0,0,2" Orientation="Horizontal">
+                        <TextBlock
+                            Margin="2,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="DidactGothic-Regular.ttf"
+                            FontSize="8"
+                            Foreground="#40b1e1"
+                            Text="MIN Z" />
+                        <Slider
+                            Width="70"
+                            LargeChange="5"
+                            Maximum="100"
+                            Minimum="0"
+                            ValueChanged="SliderChangedValue"
+                            Value="10" />
+                    </StackPanel>
+                    <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
+                        <TextBlock
+                            Margin="2,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="DidactGothic-Regular.ttf"
+                            FontSize="8"
+                            Foreground="#40b1e1"
+                            Text="MAX Z" />
+                        <Slider
+                            Width="70"
+                            LargeChange="5"
+                            Maximum="100"
+                            Minimum="0"
+                            ValueChanged="SliderChangedValue"
+                            Value="30" />
+                    </StackPanel>
+                </StackPanel>
+
+                <Line
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    Stroke="#b1b1b1"
+                    StrokeThickness="1"
+                    X1="0"
+                    X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" />
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button
+                        Width="50"
+                        Height="20"
+                        Margin="5,0,5,0"
+                        Command="local:Task5WindowCommand.Start"
+                        Content="start"
+                        Style="{StaticResource additionalBlueButtonStyle}" />
+                    <Button
+                        Width="50"
+                        Height="20"
+                        Margin="5,0,10,0"
+                        Command="local:Task5WindowCommand.Stop"
+                        Content="stop"
+                        Style="{StaticResource additionalBlueButtonStyle}" />
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

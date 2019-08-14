@@ -1,0 +1,207 @@
+﻿<Window
+    x:Class="TestTask_Junior_MelnikovaInna.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:HelixToolkit="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TestTask_Junior_MelnikovaInna"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:TestTask_Junior_MelnikovaInna.ViewModels"
+    xmlns:views="clr-namespace:TestTask_Junior_MelnikovaInna.Views"
+    Title="MAINWINDOW"
+    Width="525"
+    Height="350"
+    MinWidth="500"
+    MinHeight="350"
+    Loaded="WindowHasLoaded"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate x:Name="TemplateForTask3" DataType="{x:Type viewmodels:Task3ViewModel}">
+            <views:Task3View DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Name="TemplateForTask4" DataType="{x:Type viewmodels:Task4ViewModel}">
+            <views:Task4View DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Name="TemplateForTask5" DataType="{x:Type viewmodels:Task5ViewModel}">
+            <views:Task5View DataContext="{Binding}" />
+        </DataTemplate>
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="local:TasksWindowCommand.ShowView" Executed="Show_Executed" />
+    </Window.CommandBindings>
+
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Title" Value="My custom window" />
+            <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome
+                        CaptionHeight="30"
+                        CornerRadius="0"
+                        GlassFrameThickness="-1"
+                        ResizeBorderThickness="5" />
+                </Setter.Value>
+            </Setter>
+            <Setter x:Name="myMainTemplate" Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Window">
+                        <Border Background="#40b1e1">
+
+                            <!--  Main grid  -->
+                            <Grid Background="Transparent">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <!--  TOP border - Non client area  -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        FontFamily="Didact Gothic"
+                                        FontSize="16"
+                                        FontStyle="Normal"
+                                        FontWeight="ExtraLight"
+                                        Foreground="White"
+                                        Text="{TemplateBinding Title}" />
+
+                                    <!--  All state buttons  -->
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        Orientation="Horizontal">
+                                        <Button
+                                            Width="30"
+                                            Height="30"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            BorderThickness="0"
+                                            Click="ButtonMinimazing"
+                                            WindowChrome.IsHitTestVisibleInChrome="True">
+                                            <Line
+                                                SnapsToDevicePixels="True"
+                                                Stroke="Black"
+                                                StrokeThickness="1"
+                                                X1="0"
+                                                X2="10"
+                                                Y1="10"
+                                                Y2="10" />
+                                        </Button>
+                                        <Button
+                                            Width="30"
+                                            Height="30"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            BorderThickness="0"
+                                            Click="ButtonMaximizing"
+                                            WindowChrome.IsHitTestVisibleInChrome="True">
+                                            <Grid>
+                                                <Line
+                                                    Panel.ZIndex="1"
+                                                    SnapsToDevicePixels="True"
+                                                    Stroke="Black"
+                                                    StrokeThickness="1"
+                                                    X1="0"
+                                                    X2="12"
+                                                    Y1="0"
+                                                    Y2="0" />
+                                                <Rectangle
+                                                    Width="12"
+                                                    Height="10"
+                                                    Stroke="Black"
+                                                    StrokeThickness="1" />
+                                            </Grid>
+                                        </Button>
+                                        <Button
+                                            Width="30"
+                                            Height="30"
+                                            Click="ButtonClose"
+                                            Content="Path"
+                                            Style="{StaticResource setRedBGCloseButtonWhenMouseOver}"
+                                            WindowChrome.IsHitTestVisibleInChrome="True" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <!--  Window content  -->
+                                <Border Grid.Row="1" Background="White">
+                                    <AdornerDecorator>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="130" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--  list of all tasks  -->
+                                            <Grid>
+                                                <Border Background="#f9f9f9">
+                                                    <Grid>
+                                                        <ItemsControl x:Name="myList" Height="auto">
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <StackPanel>
+                                                                        <Button
+                                                                            x:Name="currentButton"
+                                                                            Height="26"
+                                                                            Command="local:TasksWindowCommand.ShowView"
+                                                                            Content="{Binding}"
+                                                                            Style="{StaticResource buttonTasksStyle}"
+                                                                            Tag="{Binding ElementName=currentButton}" />
+                                                                        <Line
+                                                                            Stroke="#40b1e1"
+                                                                            StrokeThickness="1"
+                                                                            X1="0"
+                                                                            X2="130"
+                                                                            Y1="0"
+                                                                            Y2="0" />
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                        <DockPanel
+                                                            Height="70"
+                                                            Margin="5,0,5,10"
+                                                            VerticalAlignment="Bottom">
+                                                            <TextBlock
+                                                                DockPanel.Dock="Bottom"
+                                                                FontFamily="DidactGothic-Regular.ttf"
+                                                                FontSize="10"
+                                                                FontStyle="Italic"
+                                                                Foreground="#7a8182"
+                                                                Text="Pls, pay attention: &#10;objects may be small or big.&#10;&#10;FOR VIEW&#10;roll the mouse wheel!" />
+                                                        </DockPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+
+                                            <Border Grid.Column="1" Background="Transparent">
+                                                <Grid>
+                                                    <ContentControl Content="{Binding}" />
+                                                    <ResizeGrip HorizontalAlignment="Right" Style="{StaticResource myResizeGripStyle}" />
+                                                </Grid>
+                                            </Border>
+
+                                        </Grid>
+                                    </AdornerDecorator>
+                                </Border>
+
+                                <!--  End Main grid  -->
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    <Grid />
+</Window>
