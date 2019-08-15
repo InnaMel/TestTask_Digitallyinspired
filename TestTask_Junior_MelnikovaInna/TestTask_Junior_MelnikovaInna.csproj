@@ -136,6 +136,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Font\DidactGothic-Regular.ttf" />
+    <None Include="MyObjects\bunny - Copy.obj" />
+    <None Include="MyObjects\bunny.obj" />
+    <None Include="MyObjects\Leone.obj" />
+    <None Include="MyObjects\Teapot.obj" />
+    <None Include="MyObjects\tour.obj" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
